@@ -6,3 +6,12 @@
     position: absolute;
     transition: 0.25s;
 }
+
+.game-grid {
+    display: grid;
+    position: relative;
+}
+
+.game-cell {
+    background: cyan;
+}

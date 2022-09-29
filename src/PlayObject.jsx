@@ -6,10 +6,15 @@ class PlayObject extends React.Component {
     }
 
     render() {
-        const { className, positionX, positionY } = this.props;
-        console.log(positionX + ", " + positionY);
+        const { className, positionX, positionY, playerScale } = this.props;
+        const styles = {
+            top: `${positionY * playerScale}px`, 
+            left: `${positionX * playerScale}px`,
+            width: `${playerScale}px`,
+            height: `${playerScale}px`,
+        };
         return (
-            <div className={className} style={{top: `${positionY * 50}px`, left: `${positionX * 50}px`}}></div>
+            <div className={className} style={styles}></div>
         )
     }
 }
