@@ -1,25 +1,61 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import "./styles.css"
+import PlayObject from './PlayObject';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class Vector2 {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  add(otherVector) {
+    const {x: otherX, y: otherY} = otherVector;
+    this.x += otherX;
+    this.y += otherY;
+    console.log("Now " + this.x + ", " + this.y);
+  }
+}
+
+const inputDirections = new Map([
+  ["w", new Vector2(0, -1)],
+  ["a", new Vector2(-1, 0)],
+  ["s", new Vector2(0, 1)],
+  ["d", new Vector2(1, 0)],
+])
+
+class App extends React.Component {
+  constructor() {
+    super();
+    window.onkeydown = event => { this.takeKeyInput(event.key); };
+
+    this.state = {
+      playerPosition: new Vector2(0, 0),
+    };
+  }
+
+  takeKeyInput = key => {
+    if (!inputDirections.has(key)) { return; }
+    this.movePlayer(inputDirections.get(key));
+    this.setState(state => ({playerPosition: state.playerPosition}));
+  }
+
+  movePlayer = direction => {
+    const { playerPosition } = this.state;
+    playerPosition.add(direction);
+  }
+
+  render() {
+    const { playerPosition } = this.state;
+    return (
+      <div className="App">
+        <PlayObject
+          className="player"
+          positionX={playerPosition.x}
+          positionY={playerPosition.y} />
+      </div>
+    );
+  }
 }
 
 export default App;
