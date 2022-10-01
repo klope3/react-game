@@ -14,7 +14,6 @@ class Vector2 {
     const {x: otherX, y: otherY} = otherVector;
     this.x += otherX;
     this.y += otherY;
-    console.log("Now " + this.x + ", " + this.y);
   }
 }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import GameCell from "./GameCell";
 
 class GameGrid extends React.Component {
     render() {
@@ -6,7 +7,7 @@ class GameGrid extends React.Component {
         const cells = [];
         const totalCells = gridWidth * gridHeight;
         for (let i = 0; i < totalCells; i++) {
-            cells.push(<div key={`cell-${i}`} className="game-cell"></div>);
+            cells.push(<GameCell cellIndex={i} />);
         }
         const styles = {
             gridTemplateColumns: `repeat(${gridWidth}, ${cellScale - cellSpacing}px)`,
