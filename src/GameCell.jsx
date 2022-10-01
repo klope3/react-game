@@ -2,9 +2,12 @@ import React from "react";
 
 class GameCell extends React.Component {
     render() {
-        const { cellIndex } = this.props;
+        const { cellIndex, isEmpty } = this.props;
+        const style = {
+            opacity: isEmpty ? 0 : 1,
+        }
         return (
-            <div key={`cell-${cellIndex}`} className="game-cell"></div>
+            <div key={`cell-${cellIndex}`} className="game-cell" style={style}></div>
         )
     }
 }

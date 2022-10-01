@@ -3,12 +3,8 @@ import GameCell from "./GameCell";
 
 class GameGrid extends React.Component {
     render() {
-        const { gridWidth, gridHeight, cellScale, cellSpacing } = this.props;
-        const cells = [];
-        const totalCells = gridWidth * gridHeight;
-        for (let i = 0; i < totalCells; i++) {
-            cells.push(<GameCell cellIndex={i} />);
-        }
+        const { gridWidth, gridHeight, cellScale, cellSpacing, cells } = this.props;
+        const cellComponents = cells.map(item => <GameCell cellIndex={item.cellIndex} isEmpty={item.isEmpty} />);
         const styles = {
             gridTemplateColumns: `repeat(${gridWidth}, ${cellScale - cellSpacing}px)`,
             gridTemplateRows: `repeat(${gridHeight}, ${cellScale - cellSpacing}px)`,
@@ -18,7 +14,7 @@ class GameGrid extends React.Component {
         }
         return (
             <div class="game-grid" style={styles}>
-                {cells}
+                {cellComponents}
             </div>
         )
     }
